@@ -87,9 +87,59 @@
             .btns { justify-content: center; }
             .hero-desc { margin: 0 auto 2.5rem auto; }
         }
+       /* Legal Popup Styles */
+#legal-toggle { display: none; }
+.legal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    overflow-y: auto;
+}
+#legal-toggle:checked ~ .legal-overlay { display: block; }
+.legal-content {
+    background: #222;
+    color: #ddd;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #444;
+    position: relative;
+}
+.close-btn {
+    float: right;
+    color: #ff4d4d;
+    font-size: 30px;
+    cursor: pointer;
+    text-decoration: none;
+} 
     </style>
 </head>
 <body>
+   <input type="checkbox" id="legal-toggle">
+<div class="legal-overlay">
+    <div class="legal-content">
+        <label for="legal-toggle" class="close-btn">&times;</label>
+        <h2 style="color:#ff4d4d;">Terms & Privacy Policy</h2>
+        <div style="font-size: 0.9rem; line-height: 1.6;">
+            <h4 style="color:#fff;">Terms of Service</h4>
+            <p><strong>1. Services:</strong> Web design and video editing via Adarsh DevCut Media.</p>
+            <p><strong>2. Payment:</strong> 50% upfront for projects over $1,000 via PayPal.</p>
+            <p><strong>3. Rights:</strong> Client owns final assets upon full payment.</p>
+            <hr style="border-color:#444">
+            <h4 style="color:#fff;">Refund & Cancellation</h4>
+            <p>Deposits are non-refundable. No refunds once development or first video drafts begin.</p>
+            <hr style="border-color:#444">
+            <h4 style="color:#fff;">Privacy Policy</h4>
+            <p>We collect name/email only for project communication. No data is sold or shared.</p>
+            <p>Contact: adarsh.devcut@gmail.com</p>
+        </div>
+        <label for="legal-toggle" style="display:block; width:100%; background:#ff4d4d; color:white; text-align:center; padding:10px; border-radius:5px; margin-top:20px; cursor:pointer;">Close</label>
+    </div>
+</div> 
 
     <nav>
         <a href="#" class="logo">ADARSH KUMAR</a>
@@ -286,6 +336,7 @@
 
     <footer>
         <p>Adarsh Kumar | India based Serving US, Australia & Europe | adarsh.devcut@gmail.com</p>
+        <label for="legal-toggle" style="color: #888; text-decoration: underline; cursor: pointer; font-size: 0.8rem;">View Terms & Privacy Policy</label>
     </footer>
 
     <script>
