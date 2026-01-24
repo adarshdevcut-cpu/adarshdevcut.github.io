@@ -116,43 +116,48 @@
     cursor: pointer;
     text-decoration: none;
 }
-        /* --- NATURE SPLASH EFFECT --- */
+        /* --- LAG-FREE NATURE SPLASH --- */
 .splash-area {
-    position: absolute;
-    inset: 0;
+    position: fixed; /* Pins colors to the screen, not the page */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
-    overflow: hidden;
     pointer-events: none;
+    overflow: hidden;
+    background: #ffffff; /* Base color */
 }
 
 .blob {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 60vw;
+    height: 60vw;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4; /* High visibility as requested */
-    animation: moveMessy 15s infinite alternate;
+    filter: blur(80px); /* Slightly lower blur reduces lag */
+    opacity: 0.4;
+    will-change: transform; /* Tells browser to optimize for movement */
+    animation: moveMessy 20s infinite alternate ease-in-out;
 }
 
 .b-red { background: #ff4d4d; top: -10%; left: -10%; }
-.b-blue { background: #3b82f6; top: 20%; right: -5%; animation-delay: -2s; }
-.b-yellow { background: #ffcc00; bottom: 10%; left: 5%; animation-delay: -4s; }
-.b-green { background: #00ff88; top: 40%; left: 25%; animation-delay: -6s; }
+.b-blue { background: #3b82f6; top: 10%; right: -10%; animation-delay: -5s; }
+.b-yellow { background: #ffcc00; bottom: -5%; left: -5%; animation-delay: -10s; }
+.b-green { background: #00ff88; bottom: 10%; right: 5%; animation-delay: -15s; }
 
 @keyframes moveMessy {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    33% { transform: translate(100px, 50px) scale(1.2) rotate(120deg); }
-    66% { transform: translate(-50px, 150px) scale(0.8) rotate(240deg); }
-    100% { transform: translate(50px, -50px) scale(1.1) rotate(360deg); }
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
 }
 
-/* Glass effect for Service Cards to show the mess behind them */
+/* Makes sections transparent so colors show through */
+.hero, .services-sec { background: transparent !important; }
+
+/* Optional: Adds a subtle glass look to service cards */
 .s-card {
     background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 </style>
