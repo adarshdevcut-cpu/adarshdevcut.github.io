@@ -116,6 +116,45 @@
     cursor: pointer;
     text-decoration: none;
 }
+        /* --- NATURE SPLASH EFFECT --- */
+.splash-area {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4; /* High visibility as requested */
+    animation: moveMessy 15s infinite alternate;
+}
+
+.b-red { background: #ff4d4d; top: -10%; left: -10%; }
+.b-blue { background: #3b82f6; top: 20%; right: -5%; animation-delay: -2s; }
+.b-yellow { background: #ffcc00; bottom: 10%; left: 5%; animation-delay: -4s; }
+.b-green { background: #00ff88; top: 40%; left: 25%; animation-delay: -6s; }
+
+@keyframes moveMessy {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(100px, 50px) scale(1.2) rotate(120deg); }
+    66% { transform: translate(-50px, 150px) scale(0.8) rotate(240deg); }
+    100% { transform: translate(50px, -50px) scale(1.1) rotate(360deg); }
+}
+
+/* Glass effect for Service Cards to show the mess behind them */
+.s-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 </style>
 </head>
 <body>
@@ -164,6 +203,12 @@
         </div>
     </nav>
 <header class="hero">
+        <div class="splash-area">
+        <div class="blob b-red"></div>
+        <div class="blob b-blue"></div>
+        <div class="blob b-yellow"></div>
+        <div class="blob b-green"></div>
+    </div>
         <div class="hero-info">
             <div class="hero-img-box">
             <img src="1000091544.png" alt="Adarsh Kumar Profile Photo">
@@ -179,6 +224,12 @@
     </header>
 
     <section class="services-sec" id="services">
+            <div class="splash-area">
+        <div class="blob b-red"></div>
+        <div class="blob b-blue"></div>
+        <div class="blob b-yellow"></div>
+        <div class="blob b-green"></div>
+    </div>
     <h2 class="title-center">Expert Services</h2>
         <div class="row">
             <div class="s-card">
