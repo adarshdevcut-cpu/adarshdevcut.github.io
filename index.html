@@ -63,7 +63,8 @@
         .intro-part {
             position: fixed; inset: 0; background: #080808;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 400; opacity: 0; visibility: hidden; transition: opacity 0.5s ease;
+            z-index: 400; opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease; /* Smooth fade in */
         }
         .sunrays { position: absolute; inset: -50%; background: conic-gradient(from 0deg, transparent 0, rgba(255,204,0,0.05) 15deg, transparent 30deg); animation: solenoidSpin 20s linear infinite; }
         .starfall { position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 50% 50%, #fff 100%, transparent); background-size: 300px 600px; animation: stars 1.2s linear infinite; opacity: 0.3; }
@@ -83,141 +84,17 @@
             100% { transform: rotate(var(--r)) translateY(-120vh) scaleY(2); opacity: 0; } 
         }
 
-        #teleport-trigger:checked ~ .portal-scene { opacity: 0; visibility: hidden; }
-        #teleport-trigger:checked ~ .hyperloop-container { visibility: visible; animation: warpFade 1.5s forwards; }
-        @keyframes warpFade { 0%, 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
-        #teleport-trigger:checked ~ .intro-part { opacity: 1; visibility: visible; transition-delay: 1.3s; }
-
-        .b1 { --r: 0deg; animation: radialBlast 0.4s infinite; }
-        .b2 { --r: 45deg; animation: radialBlast 0.4s infinite 0.1s; }
-        .b3 { --r: 90deg; animation: radialBlast 0.4s infinite 0.2s; }
-        .b4 { --r: 135deg; animation: radialBlast 0.4s infinite 0.3s; }
-        .b5 { --r: 180deg; animation: radialBlast 0.4s infinite 0.05s; }
-        .b6 { --r: 225deg; animation: radialBlast 0.4s infinite 0.15s; }
-        .b7 { --r: 270deg; animation: radialBlast 0.4s infinite 0.25s; }
-        .b8 { --r: 315deg; animation: radialBlast 0.4s infinite 0.35s; }
-    </style>
-</head>
-<body>
-
-    <input type="checkbox" id="teleport-trigger">
-
-    <div class="portal-scene">
-        <div class="gate"><div class="welcome-text">Welcome to my portfolio</div></div>
-        <label for="teleport-trigger" class="enter-label">ENTER</label>
-    </div>
-
-    <div class="hyperloop-container">
-        <div class="vortex">
-            <div class="block b1"></div><div class="block b2"></div><div class="block b3"></div><div class="block b4"></div>
-            <div class="block b5"></div><div class="block b6"></div><div class="block b7"></div><div class="block b8"></div>
-        </div>
-    </div>
-
-    <div class="intro-part">
-        <div class="sunrays"></div>
-        <div class="starfall"></div>
-        <div class="video-space">
-            <video id="intro-vid" playsinline>
-                <source src="VID_20260124084713.mp4" type="video/mp4">
-            </video>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adarsh Kumar | Global Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; overflow: hidden; font-family: 'Inter', sans-serif; color: white; }
-        #teleport-trigger { display: none; }
-
-        /* --- 1. PORTAL SCENE --- */
-        .portal-scene {
-            position: fixed; inset: 0; background: #000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 500; transition: opacity 0.3s ease;
-        }
-        .gate {
-            width: 320px; height: 320px; border-radius: 50%;
-            position: relative; display: flex; align-items: center; justify-content: center;
-        }
-        .gate::before, .gate::after {
-            content: ''; position: absolute; inset: -15px; border-radius: 50%;
-            padding: 10px;
-            background: conic-gradient(from 0deg, #3b82f6, transparent 15%, #60a5fa 30%, transparent 50%, #1e4ed8 70%, transparent 85%, #3b82f6);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude;
-            filter: contrast(180%) drop-shadow(0 0 15px #1e4ed8);
-            animation: solenoidSpin 0.6s linear infinite;
-            will-change: transform;
-        }
-        .welcome-text { font-family: 'Dancing Script', cursive; color: #fff; font-size: 2.2rem; z-index: 5; text-shadow: 0 0 20px #3b82f6; text-align: center; width: 260px; }
-
-        /* --- 3D GLASS BUTTON --- */
-        .enter-label {
-            margin-top: 35px; padding: 14px 50px; font-size: 1.2rem; font-weight: 900; 
-            color: white; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
-            z-index: 10; border-radius: 12px; position: relative; overflow: hidden;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            transition: transform 0.2s;
-        }
-        .enter-label::before {
-            content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.4), transparent);
-            animation: scanline 2.5s linear infinite;
-        }
-
-        /* --- LAG-FREE WARP --- */
-        .hyperloop-container { position: fixed; inset: 0; z-index: 600; visibility: hidden; opacity: 0; background: #000; overflow: hidden; }
-        .vortex { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-        .block { 
-            position: absolute; width: 10px; height: 250px; 
-            background: linear-gradient(to bottom, #ff1100, #ffcc00, transparent); 
-            transform-origin: center bottom; opacity: 0; 
-            will-change: transform, opacity; transform: translateZ(0);
-        }
-
-        /* --- INTRO PAGE --- */
-        .intro-part {
-            position: fixed; inset: 0; background: #080808;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 400; opacity: 0; visibility: hidden; transition: opacity 0.5s ease;
-        }
-        .sunrays { position: absolute; inset: -50%; background: conic-gradient(from 0deg, transparent 0, rgba(255,204,0,0.05) 15deg, transparent 30deg); animation: solenoidSpin 20s linear infinite; }
-        .starfall { position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 50% 50%, #fff 100%, transparent); background-size: 300px 600px; animation: stars 1.2s linear infinite; opacity: 0.3; }
-        .video-space { width: 85%; max-width: 720px; aspect-ratio: 16/9; background: #000; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255, 204, 0, 0.3); overflow: hidden; position: relative; z-index: 10; }
-        .video-space video { width: 100%; height: 100%; object-fit: cover; }
-        .tagline { color: #fff; text-align: center; letter-spacing: 3px; font-weight: 900; text-transform: uppercase; z-index: 10; font-size: 1.1rem; line-height: 1.6; background: linear-gradient(to right, #fff, #ffcc00, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; max-width: 85%; }
-        .intro-footer { position: absolute; bottom: 0; width: 100%; height: 60px; background: #000; display: flex; align-items: center; justify-content: center; border-top: 1px solid #1a1a1a; }
-        .footer-text { color: #555; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; }
-
-        /* KEYFRAMES & TIMING */
-        @keyframes solenoidSpin { to { transform: rotate(360deg); } }
-        @keyframes scanline { 0% { top: -100%; } 100% { top: 100%; } }
-        @keyframes stars { from { background-position: 0 0; } to { background-position: 0 600px; } }
-        @keyframes radialBlast { 
-            0% { transform: rotate(var(--r)) translateY(0) scaleY(0); opacity: 0; } 
-            20% { opacity: 1; } 
-            100% { transform: rotate(var(--r)) translateY(-120vh) scaleY(2); opacity: 0; } 
-        }
-
+        /* TRIGGER LOGIC */
         #teleport-trigger:checked ~ .portal-scene { opacity: 0; visibility: hidden; }
         #teleport-trigger:checked ~ .hyperloop-container { visibility: visible; animation: warpFade 1.5s forwards; }
         @keyframes warpFade { 0%, 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
 
-        /* INTRO STAY: 2.2 SECONDS */
+        /* The Intro appears after 1.3s and stays until the JS redirect happens */
         #teleport-trigger:checked ~ .intro-part { 
             opacity: 1; 
             visibility: visible; 
             transition-delay: 1.3s; 
-            animation: exitSlide 0.5s forwards 3.5s; /* 1.3s warp + 2.2s intro */
         }
-        @keyframes exitSlide { to { transform: translateY(-100%); opacity: 0; } }
 
         .b1 { --r: 0deg; animation: radialBlast 0.4s infinite; }
         .b2 { --r: 45deg; animation: radialBlast 0.4s infinite 0.1s; }
@@ -265,15 +142,16 @@
 
         trigger.addEventListener('change', function() {
             if(this.checked) {
-                // UNMUTE AND PLAY
                 video.muted = false;
                 video.load();
 
+                // 1. Play video when warp lands (1.3s)
                 setTimeout(() => { 
                     video.play().catch(e => console.log("Audio block bypass failed", e)); 
                 }, 1300);
 
-                // REDIRECT AFTER 2.2s (Total 3.5s)
+                // 2. REDIRECT after exactly 2.2s of Intro Display
+                // Math: 1.3s (Warp) + 2.2s (Intro) = 3.5s total delay
                 setTimeout(() => {
                     document.body.style.transition = "opacity 0.4s ease";
                     document.body.style.opacity = "0";
@@ -286,4 +164,3 @@
     </script>
 </body>
 </html>
-
