@@ -116,19 +116,19 @@
     cursor: pointer;
     text-decoration: none;
 }
-        /* --- PERFORMANCE OPTIMIZED SPLASH --- */
-.splash-area {
-    position: absolute; /* Stays at the top, doesn't follow scroll */
-    top: 0;
-    left: 0;
+        /* Optimized "Top-Only" Splash */
+.top-wrapper {
+    position: relative;
     width: 100%;
-    height: 1500px; /* Limits height to roughly Hero + Services area */
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
     background: #ffffff;
-    /* Hardware acceleration to stop the lag */
-    transform: translateZ(0);
+    overflow: hidden; /* Clips the blobs so they don't mess up other sections */
+}
+
+.splash-area {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .blob {
@@ -136,20 +136,30 @@
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    filter: blur(70px); /* Lower blur = Much faster speed */
-    opacity: 0.35;
+    filter: blur(90px);
+    opacity: 0.5; /* High visibility */
     will-change: transform;
+    transform: translateZ(0); /* GPU Boost */
 }
 
-/* Static positions (No animations = No Lag) */
+/* Messy spread across the two sections */
 .b-red { background: #ff4d4d; top: -5%; left: -10%; }
-.b-blue { background: #3b82f6; top: 15%; right: -10%; }
-.b-yellow { background: #ffcc00; top: 40%; left: -5%; }
-.b-green { background: #00ff88; top: 60%; right: 5%; }
+.b-blue { background: #3b82f6; top: 10%; right: -5%; }
+.b-yellow { background: #ffcc00; top: 45%; left: -5%; }
+.b-green { background: #00ff88; bottom: 5%; right: 5%; }
 
-/* Only show on Desktop to protect your mobile Speed Score */
-@media (max-width: 768px) {
-    .splash-area { display: none; } 
+/* Ensure content sits above the splashes */
+.hero, .services-sec { 
+    position: relative; 
+    z-index: 2; 
+    background: transparent !important; 
+}
+
+/* Glass effect for Service Cards */
+.s-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 </style>
@@ -199,13 +209,15 @@
             </div>
         </div>
     </nav>
-<header class="hero">
-        <div class="splash-area">
+    <div class="top-wrapper">
+    <div class="splash-area">
         <div class="blob b-red"></div>
         <div class="blob b-blue"></div>
         <div class="blob b-yellow"></div>
         <div class="blob b-green"></div>
     </div>
+
+<header class="hero">
         <div class="hero-info">
             <div class="hero-img-box">
             <img src="1000091544.png" alt="Adarsh Kumar Profile Photo">
@@ -221,28 +233,23 @@
     </header>
 
     <section class="services-sec" id="services">
-            <div class="splash-area">
-        <div class="blob b-red"></div>
-        <div class="blob b-blue"></div>
-        <div class="blob b-yellow"></div>
-        <div class="blob b-green"></div>
-    </div>
     <h2 class="title-center">Expert Services</h2>
         <div class="row">
             <div class="s-card">
-                <h3>Web Development</h3>
+                <h3>🚀 Web Development</h3>
                 <p>Building clean, fast, and reliable digital solutions including website redesigns.</p>
             </div>
             <div class="s-card">
-                <h3>Performance SEO</h3>
+                <h3>🔥 Performance SEO</h3>
                 <p>Responsive and performance-optimized websites tailored for modern needs.</p>
             </div>
             <div class="s-card">
-                <h3>Video Editing</h3>
+                <h3>🎦 Video Editing</h3>
                 <p>Cinematic promotional editing that captures brand stories and builds trust.</p>
             </div>
         </div>
     </section>
+    </div>
 
     <section style="padding: 80px 10%; background: #050505; text-align: center;">
     <h2 style="color: #fff; font-size: 2rem; margin-bottom: 30px;">Proven Results</h2>
