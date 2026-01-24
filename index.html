@@ -127,27 +127,38 @@
     </div>
 
     <script>
-        const trigger = document.getElementById('teleport-trigger');
-        const video = document.getElementById('intro-vid');
+    const trigger = document.getElementById('teleport-trigger');
+    const video = document.getElementById('intro-vid');
 
-        trigger.addEventListener('change', function() {
-            if(this.checked) {
-                // THE AUDIO FIX: Unmute and Play
-                setTimeout(() => { 
-                    video.muted = false; // Ensures audio is on
-                    video.play().catch(e => console.log("Audio block bypass failed", e)); 
-                }, 1300);
+    // Pre-setting volume but keeping it paused
+    video.volume = 1.0; 
 
-                // Redirect logic
+    trigger.addEventListener('change', function() {
+        if(this.checked) {
+            // 1. SOUND FIX: Force the video to be unmuted immediately on click
+            video.muted = false;
+            
+            // 2. We "load" the video here to prime the audio engine
+            video.load();
+
+            setTimeout(() => { 
+                // 3. Play with sound when the warp lands
+                video.play().catch(e => {
+                    console.log("Audio failed to play. Browser blocked it.", e);
+                });
+            }, 1300);
+
+            // 4. Redirect to main portfolio
+            setTimeout(() => {
+                document.body.style.transition = "opacity 0.6s ease";
+                document.body.style.opacity = "0";
                 setTimeout(() => {
-                    document.body.style.transition = "opacity 0.5s";
-                    document.body.style.opacity = "0";
-                    setTimeout(() => {
-                        window.location.href = "main.html"; 
-                    }, 500);
-                }, 4300);
-            }
-        });
-    </script>
+                    window.location.href = "main.html"; 
+                }, 600);
+            }, 4300);
+        }
+    });
+</script>
+
 </body>
 </html>
