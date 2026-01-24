@@ -116,50 +116,49 @@
     cursor: pointer;
     text-decoration: none;
 }
-        /* --- OPTIMIZED NATURE SPLASH --- */
+        /* --- LAG-FREE NATURE SPLASH --- */
 .splash-area {
-    position: fixed;
-    inset: 0;
+    position: fixed; /* Pins colors to the screen, not the page */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
-    background: #ffffff;
-    /* Prevents background recalculations during scroll */
-    transform: translate3d(0,0,0);
+    background: #ffffff; /* Base color */
 }
 
 .blob {
     position: absolute;
-    width: 50vw;
-    height: 50vw;
+    width: 60vw;
+    height: 60vw;
     border-radius: 50%;
-    /* 60px is the sweet spot for performance vs visuals */
-    filter: blur(60px); 
-    opacity: 0.3;
-    /* This is the magic line for speed */
-    will-change: transform;
-    transform: translate3d(0,0,0);
-    animation: moveMessy 25s infinite alternate ease-in-out;
+    filter: blur(80px); /* Slightly lower blur reduces lag */
+    opacity: 0.4;
+    will-change: transform; /* Tells browser to optimize for movement */
+    animation: moveMessy 20s infinite alternate ease-in-out;
 }
 
-/* Slower animations = Higher Score */
+.b-red { background: #ff4d4d; top: -10%; left: -10%; }
+.b-blue { background: #3b82f6; top: 10%; right: -10%; animation-delay: -5s; }
+.b-yellow { background: #ffcc00; bottom: -5%; left: -5%; animation-delay: -10s; }
+.b-green { background: #00ff88; bottom: 10%; right: 5%; animation-delay: -15s; }
+
 @keyframes moveMessy {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    100% { transform: translate3d(30px, 30px, 0) scale(1.05); }
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
 }
 
-.b-red { background: #ff4d4d; top: -5%; left: -5%; }
-.b-blue { background: #3b82f6; top: 10%; right: -5%; animation-delay: -5s; }
-.b-yellow { background: #ffcc00; bottom: 5%; left: -5%; animation-delay: -10s; }
-.b-green { background: #00ff88; bottom: 15%; right: 5%; animation-delay: -15s; }
-        @media (max-width: 768px) {
-    .blob {
-        animation: none; /* Stops the GPU drain on mobile */
-        filter: blur(40px);
-        opacity: 0.2;
-    }
-}
+/* Makes sections transparent so colors show through */
+.hero, .services-sec { background: transparent !important; }
 
+/* Optional: Adds a subtle glass look to service cards */
+.s-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
 </style>
 </head>
 <body>
